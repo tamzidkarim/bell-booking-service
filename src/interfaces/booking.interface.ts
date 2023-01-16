@@ -1,14 +1,21 @@
 enum RoomType {
-  PresidentialSuite = 'Presidential Suite',
+  PresidentialSuite = 'presidential suite',
+}
+
+export enum BookingStatus {
+  Confirmed = 'confirmed',
+  Cancelled = 'cancelled',
 }
 
 export interface Booking {
-  id: number;
+  id: string;
   email: string;
   firstName: string;
   lastName: string;
-  checkIn: string;
-  checkOut: string;
+  name: string;
+  checkIn: Date;
+  checkOut: Date;
   totalGuests: number;
   roomType: RoomType;
+  status: BookingStatus;
 }

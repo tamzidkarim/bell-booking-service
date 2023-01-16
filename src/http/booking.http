@@ -1,0 +1,17 @@
+# baseURL
+@baseURL = http://localhost:3000
+
+###
+# Create Booking
+POST {{ baseURL }}/booking
+Content-Type: application/json
+
+{
+  "email": "a@a.com",
+  "firstName": "John",
+  "lastName": "Doe",
+  "checkIn": "2023-01-21",
+  "checkOut": "2023-01-23",
+  "totalGuests":3,
+	"roomType": "presidential suite"
+}
