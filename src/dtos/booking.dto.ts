@@ -1,8 +1,5 @@
 import { IsEmail, IsEnum, IsString, IsDateString, Min, Max, IsInt, IsNotEmpty } from 'class-validator';
-
-enum RoomType {
-  PresidentialSuite = 'presidential suite',
-}
+import { RoomType } from '@interfaces/booking.interface';
 
 export class CreateBookingDto {
   @IsEmail({}, { message: 'Please provide a valid email address' })

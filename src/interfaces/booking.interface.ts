@@ -1,4 +1,4 @@
-enum RoomType {
+export enum RoomType {
   PresidentialSuite = 'presidential suite',
 }
 

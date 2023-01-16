@@ -14,7 +14,6 @@ class BookingRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.bookingController.index);
     this.router.post(`${this.path}`, validationMiddleware(CreateBookingDto, 'body'), this.bookingController.createBooking);
     this.router.get(`${this.path}/:id`, this.bookingController.viewBooking);
     this.router.get(`${this.path}/:id/cancel`, this.bookingController.cancelBooking);

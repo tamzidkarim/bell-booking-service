@@ -21,10 +21,8 @@ class BookingService {
 
     const duration = checkOutDate.diff(checkInDate, 'day');
 
-    if (duration <= 0) throw new HttpException(400, 'Check out date must be after check in date');
     if (duration > 3) throw new HttpException(400, 'Maximum stay is 3 days');
 
-    dayjs(bookingData.checkIn).diff(dayjs(bookingData.checkOut), 'day');
     const createBookingData: Booking = {
       id: uuidv4(),
       name: bookingData.firstName + ' ' + bookingData.lastName,
