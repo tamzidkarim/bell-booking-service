@@ -19,3 +19,9 @@ export interface Booking {
   roomType: RoomType;
   status: BookingStatus;
 }
+
+export interface CreateBookingResponse {
+  id: string;
+  cancelLink: string;
+  detailsLink: string;
+}

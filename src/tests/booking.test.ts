@@ -1,6 +1,6 @@
 import request from 'supertest';
 import App from '@/app';
-import IndexRoute from '@routes/index.route';
+import { BookingRoute } from '@/routes';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
@@ -9,10 +9,10 @@ afterAll(async () => {
 describe('Testing Index', () => {
   describe('[GET] /', () => {
     it('response statusCode 200', () => {
-      const indexRoute = new IndexRoute();
-      const app = new App([indexRoute]);
+      const bookingRoute = new BookingRoute();
+      const app = new App([bookingRoute]);
 
-      return request(app.getServer()).get('/api/v1.0/').expect(200);
+      return request(app.getServer()).get('/api/v1.0/bookings').expect(200);
     });
   });
 });

@@ -17,9 +17,31 @@ class BookingController {
   public createBooking = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const bookingData: CreateBookingDto = req.body;
-      const createBookingData: Booking = await this.bookingService.createBooking(bookingData);
+      const createBookingData = await this.bookingService.createBooking(bookingData);
 
       res.status(201).json({ data: createBookingData, message: 'Your booking was successful' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public viewBooking = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const id = req.params.id;
+      const bookingData: Booking = await this.bookingService.viewBooking(id);
+
+      res.status(200).json({ data: bookingData, message: 'Booking details' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public cancelBooking = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const id = req.params.id;
+      const bookingData: Booking = await this.bookingService.cancelBooking(id);
+
+      res.status(200).json({ data: bookingData, message: 'Your booking was cancelled' });
     } catch (error) {
       next(error);
     }

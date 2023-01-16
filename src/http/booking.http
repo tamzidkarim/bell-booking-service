@@ -1,9 +1,9 @@
 # baseURL
-@baseURL = http://localhost:3000
+@baseURL = http://localhost:3000/api/v1.0
 
 ###
 # Create Booking
-POST {{ baseURL }}/booking
+POST {{ baseURL }}/bookings
 Content-Type: application/json
 
 {
@@ -15,3 +15,14 @@ Content-Type: application/json
   "totalGuests":3,
 	"roomType": "presidential suite"
 }
+
+
+###
+# View Booking
+GET {{ baseURL }}/bookings/164447b6-0a66-47f2-a44d-33e6f504843a
+Content-Type: application/json
+
+###
+# Cancel Booking
+GET {{ baseURL }}/bookings/559f0ba1-154a-4f60-ba25-0beeb97167e2/cancel
+Content-Type: application/json
