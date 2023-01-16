@@ -1,0 +1,15 @@
+tags:
+- name: booking-service
+  description: booking-service API
+
+# paths:
+
+
+
+# # definitions
+# definitions:
+
+
+schemes:
+ - https
+ - http
