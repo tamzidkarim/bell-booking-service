@@ -13,8 +13,8 @@ export interface Booking {
   firstName: string;
   lastName: string;
   name: string;
-  checkIn: Date;
-  checkOut: Date;
+  checkIn: number;
+  checkOut: number;
   totalGuests: number;
   roomType: RoomType;
   status: BookingStatus;
@@ -24,4 +24,9 @@ export interface CreateBookingResponse {
   id: string;
   cancelLink: string;
   detailsLink: string;
+}
+
+export interface ViewBookingResponse extends Omit<Booking, 'checkIn' | 'checkOut'> {
+  checkIn: string;
+  checkOut: string;
 }

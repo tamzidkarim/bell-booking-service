@@ -16,11 +16,10 @@ const bookingData: CreateBookingDto = {
 };
 
 describe('Testing Bookings', () => {
-  const bookingRoute = new BookingRoute();
-  const app = new App([bookingRoute]);
-
   describe('Create a Booking || [POST] /api/v1.0/bookings', () => {
     it('should create a new booking', async () => {
+      const bookingRoute = new BookingRoute();
+      const app = new App([bookingRoute]);
       const createBooking = await request(app.getServer()).post('/api/v1.0/bookings').send(bookingData);
 
       expect(createBooking.statusCode).toBe(201);
@@ -29,7 +28,22 @@ describe('Testing Bookings', () => {
       expect(createBooking.body.data).toHaveProperty('detailsLink');
     });
 
+    it('should return 409 and error message if no booking date is same or overlapped with another booking', async () => {
+      const bookingRoute = new BookingRoute();
+      const app = new App([bookingRoute]);
+      await request(app.getServer()).post('/api/v1.0/bookings').send(bookingData);
+      const createBooking = await request(app.getServer())
+        .post('/api/v1.0/bookings')
+        .send({ ...bookingData, checkIn: '2023-01-22', checkOut: '2023-01-25' });
+
+      expect(createBooking.statusCode).toBe(409);
+      expect(createBooking.body).toHaveProperty('message');
+      expect(createBooking.body.message).toBe('The room is already booked for the selected dates');
+    });
+
     it('should return 400 and error message if total guests is more than 3', async () => {
+      const bookingRoute = new BookingRoute();
+      const app = new App([bookingRoute]);
       const createBooking = await request(app.getServer())
         .post('/api/v1.0/bookings')
         .send({ ...bookingData, totalGuests: 4 });
@@ -40,6 +54,8 @@ describe('Testing Bookings', () => {
     });
 
     it('should return 400 and error message if checkin or checkout dates are past dates', async () => {
+      const bookingRoute = new BookingRoute();
+      const app = new App([bookingRoute]);
       const createBooking = await request(app.getServer())
         .post('/api/v1.0/bookings')
         .send({ ...bookingData, checkIn: dayjs('2022-01-21').toDate() });
@@ -50,6 +66,8 @@ describe('Testing Bookings', () => {
     });
 
     it('should return 400 and error message if duration is more than 3 days', async () => {
+      const bookingRoute = new BookingRoute();
+      const app = new App([bookingRoute]);
       const createBooking = await request(app.getServer())
         .post('/api/v1.0/bookings')
         .send({ ...bookingData, checkIn: dayjs('2023-01-21').toDate(), checkOut: dayjs('2023-01-28').toDate() });
@@ -61,6 +79,8 @@ describe('Testing Bookings', () => {
   });
 
   describe('Retrieve Booking Information || [GET] /api/v1.0/bookings/:id', () => {
+    const bookingRoute = new BookingRoute();
+    const app = new App([bookingRoute]);
     it('should return booking information', async () => {
       const createBooking = await request(app.getServer()).post('/api/v1.0/bookings').send(bookingData);
 
@@ -82,6 +102,8 @@ describe('Testing Bookings', () => {
   });
 
   describe('Cancel A Booking || [GET] /api/v1.0/bookings/:id/cancel', () => {
+    const bookingRoute = new BookingRoute();
+    const app = new App([bookingRoute]);
     it('should cancel a booking', async () => {
       const createBooking = await request(app.getServer()).post('/api/v1.0/bookings').send(bookingData);
 

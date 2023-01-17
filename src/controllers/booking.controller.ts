@@ -20,7 +20,7 @@ class BookingController {
   public viewBooking = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const id = req.params.id;
-      const bookingData: Booking = await this.bookingService.viewBooking(id);
+      const bookingData = await this.bookingService.viewBooking(id);
 
       res.status(200).json({ data: bookingData, message: 'Booking details' });
     } catch (error) {
@@ -31,7 +31,7 @@ class BookingController {
   public cancelBooking = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const id = req.params.id;
-      const bookingData: Booking = await this.bookingService.cancelBooking(id);
+      const bookingData = await this.bookingService.cancelBooking(id);
 
       res.status(200).json({ data: bookingData, message: 'Your booking was cancelled' });
     } catch (error) {
