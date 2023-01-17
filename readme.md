@@ -184,10 +184,3 @@ http://localhost:3000/api-docs
 
 ```
 
-OR,
-
-```
-
-http://localhost/api-docs
-
-```
